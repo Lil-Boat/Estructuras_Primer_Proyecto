@@ -1,8 +1,5 @@
-# getpass permite solicitar una contraseña
-# sin mostrarla en pantalla.
-from getpass import getpass
-
 from cli.validaciones import (
+    leer_contrasena,
     leer_entero,
     leer_no_vacio,
     leer_opcion
@@ -36,7 +33,7 @@ def login(motor):
 
             # La contraseña no se muestra
             # en texto plano.
-            contrasena = getpass(
+            contrasena = leer_contrasena(
                 "Contraseña: "
             )
 
@@ -344,7 +341,7 @@ def submenu_usuarios(
                 )
 
                 # Contraseña oculta.
-                contrasena = getpass(
+                contrasena = leer_contrasena(
                     "Contraseña: "
                 )
 
@@ -404,7 +401,7 @@ def submenu_usuarios(
 
                 if cambiar_clave == "S":
 
-                    contrasena = getpass(
+                    contrasena = leer_contrasena(
                         "Nueva contraseña: "
                     )
 

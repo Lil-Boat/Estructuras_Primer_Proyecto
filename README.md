@@ -160,13 +160,16 @@ El sistema solicita:
 - ID de usuario.
 - Contraseña.
 
-La contraseña se captura utilizando:
+La contraseña se captura mediante un lector especial (`cli.validaciones.leer_contrasena`) que:
 
-```python
-from getpass import getpass
+- Oculta los caracteres con `getpass` cuando se ejecuta en una consola interactiva real.
+- Si la entrada no es una terminal interactiva (IDE, tubería, CI), usa `input()` normal para evitar que el programa se bloquee en Windows.
+
+Para forzar siempre el modo con eco en pantalla, se puede definir la variable de entorno:
+
+```text
+FLUJOS_MOSTRAR_CLAVE=1
 ```
-
-Por esta razón, los caracteres digitados no aparecen en texto plano en la consola.
 
 ---
 
@@ -509,7 +512,7 @@ sistema_gestor_flujos/
 │   ├── subtareas.csv
 │   └── auditoria_log.csv
 │
-├── tests/
+├── test/
 │   └── test_sistema.py
 │
 └── docs/
@@ -532,7 +535,7 @@ python main.py
 ## Ejecución de pruebas
 
 ```bash
-python -m unittest discover -s tests -v
+python -m unittest discover -s test -v
 ```
 
 Las pruebas verifican, entre otros aspectos:
